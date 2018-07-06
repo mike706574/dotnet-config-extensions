@@ -56,7 +56,7 @@ namespace Mike.Extensions.Configuration.Tests
         }
 
         [Fact]
-        public void RequiredValue()
+        public void RequiredStringValue()
         {
             IConfiguration config = BuildConfig(new Dictionary<string, string>()
             {
@@ -76,6 +76,20 @@ namespace Mike.Extensions.Configuration.Tests
                 IConfiguration config = BuildConfig(new Dictionary<string, string>());
 
                 config.GetRequiredValue<string>("Foo");
+            });
+
+            Assert.Equal("No value found for required configuration property \"Foo\".",
+                         exception.Message);
+        }
+
+        [Fact]
+        public void MissingRequiredInteger()
+        {
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+            {
+                IConfiguration config = BuildConfig(new Dictionary<string, string>());
+
+                config.GetRequiredValue<int>("Foo");
             });
 
             Assert.Equal("No value found for required configuration property \"Foo\".",

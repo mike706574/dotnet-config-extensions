@@ -8,13 +8,13 @@ namespace Mike.Extensions.Configuration
     {
         public static T GetRequiredValue<T>(this IConfiguration config, string key)
         {
-            T value = config.GetValue<T>(key);
-
-            if (value == null)
+            if (config[key] == null)
             {
                 string message = $"No value found for required configuration property \"{key}\".";
                 throw new ArgumentException(message);
             }
+
+            T value = config.GetValue<T>(key);
 
             return value;
         }
