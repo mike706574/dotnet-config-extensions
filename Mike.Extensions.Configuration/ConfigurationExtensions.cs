@@ -19,6 +19,11 @@ namespace Mike.Extensions.Configuration
             return value;
         }
 
+        public static string GetRequiredString(this IConfiguration config, string key)
+        {
+            return GetRequiredValue<string>(config, key);
+        }
+
         public static T GetRequiredEnumValue<T>(this IConfiguration config, string key)
         {
             string value = config.GetValue<string>(key);

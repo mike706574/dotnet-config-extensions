@@ -55,6 +55,8 @@ namespace Mike.Extensions.Configuration.Tests
                 exception.Message);
         }
 
+
+
         [Fact]
         public void RequiredStringValue()
         {
@@ -94,6 +96,19 @@ namespace Mike.Extensions.Configuration.Tests
 
             Assert.Equal("No value found for required configuration property \"Foo\".",
                          exception.Message);
+        }
+
+        [Fact]
+        public void RequiredString()
+        {
+            IConfiguration config = BuildConfig(new Dictionary<string, string>()
+            {
+                {"Foo", "Bar"}
+            });
+
+            string foo = config.GetRequiredString("Foo");
+
+            Assert.Equal("Bar", foo);
         }
 
         private IConfiguration BuildConfig(IDictionary<string, string> props)
