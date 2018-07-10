@@ -111,6 +111,34 @@ namespace Mike.Extensions.Configuration.Tests
             Assert.Equal("Bar", foo);
         }
 
+        [Fact]
+        public void NestedRequiredString()
+        {
+            IConfiguration config = BuildConfig(new Dictionary<string, string>()
+            {
+                {"Foo:Bar", "Baz"}
+            });
+
+            string foo = config.GetRequiredString("Foo:bar");
+
+            Assert.Equal("Baz", foo);
+        }
+
+        [Fact]
+        public void NestedRequiredStringFromSection()
+        {
+            IConfiguration config = BuildConfig(new Dictionary<string, string>()
+            {
+                {"Foo:Bar", "Baz"}
+            });
+
+            IConfigurationSection section = config.GetSection("Foo");
+
+            string foo = section.GetRequiredString("Bar");
+
+            Assert.Equal("Baz", foo);
+        }
+
         private IConfiguration BuildConfig(IDictionary<string, string> props)
         {
             return new ConfigurationBuilder()
