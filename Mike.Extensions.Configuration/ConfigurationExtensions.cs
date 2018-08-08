@@ -21,9 +21,7 @@ namespace Mike.Extensions.Configuration
 
         public static T GetValueOrDefault<T>(this IConfiguration config, string key, T defaultValue)
         {
-            T value = config.GetValue<T>(key);
-
-            return value == null ? defaultValue : value;
+            return config[key] == null ? defaultValue : config.GetValue<T>(key);
         }
 
         public static string GetRequiredString(this IConfiguration config, string key)
