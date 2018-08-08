@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Mike.Extensions.Configuration</RootNamespace>
     <PackageId>Mike.Extensions.Configuration</PackageId>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <Authors>mike706574</Authors>
     <Title>Mike.Extensions.Configuration</Title>
     <Description>Extensions for IConfiguration.</Description>
