@@ -19,6 +19,13 @@ namespace Mike.Extensions.Configuration
             return value;
         }
 
+        public static T GetValueOrDefault<T>(this IConfiguration config, string key, T defaultValue)
+        {
+            T value = config.GetValue<T>(key);
+
+            return value == null ? defaultValue : value;
+        }
+
         public static string GetRequiredString(this IConfiguration config, string key)
         {
             return GetRequiredValue<string>(config, key);

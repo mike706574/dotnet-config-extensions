@@ -139,6 +139,42 @@ namespace Mike.Extensions.Configuration.Tests
             Assert.Equal("Baz", foo);
         }
 
+        [Fact]
+        public void GetValueNotDefault()
+        {
+            IConfiguration config = BuildConfig(new Dictionary<string, string>()
+            {
+                {"Foo", "true"}
+            });
+
+            bool foo = config.GetValueOrDefault<bool>("Foo", false);
+
+            Assert.True(foo);
+        }
+
+        [Fact]
+        public void GetValueWhenSameAsDefault()
+        {
+            IConfiguration config = BuildConfig(new Dictionary<string, string>()
+            {
+                {"Foo", "false"}
+            });
+
+            bool foo = config.GetValueOrDefault<bool>("Foo", false);
+
+            Assert.False(foo);
+        }
+
+        [Fact]
+        public void GetDefaultNotValue()
+        {
+            IConfiguration config = BuildConfig(new Dictionary<string, string>());
+
+            bool foo = config.GetValueOrDefault<bool>("Foo", false);
+
+            Assert.False(foo);
+        }
+
         private IConfiguration BuildConfig(IDictionary<string, string> props)
         {
             return new ConfigurationBuilder()
